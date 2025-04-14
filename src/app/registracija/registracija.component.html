@@ -1,0 +1,97 @@
+<div class="registracija-container">
+    <h2>Registracija korisnika</h2>
+    <form [formGroup]="registracijaForma" (ngSubmit)="registrujSe()">
+      <!-- Korisničko ime -->
+      <div class="form-group">
+        <label for="korisnickoIme">Korisničko ime</label>
+        <input 
+          type="text"
+          id="korisnickoIme"
+          formControlName="korisnickoIme"
+          class="form-control"
+          [ngClass]="{'is-invalid': registracijaForma.get('korisnickoIme')?.invalid && (registracijaForma.get('korisnickoIme')?.dirty || registracijaForma.get('korisnickoIme')?.touched)}">
+        <div *ngIf="registracijaForma.get('korisnickoIme')?.invalid && (registracijaForma.get('korisnickoIme')?.dirty || registracijaForma.get('korisnickoIme')?.touched)" class="invalid-feedback">
+          <div *ngIf="registracijaForma.get('korisnickoIme')?.errors?.['required']">
+            Korisničko ime je obavezno
+          </div>
+          <div *ngIf="registracijaForma.get('korisnickoIme')?.errors?.['minlength']">
+            Korisničko ime mora imati najmanje 3 karaktera
+          </div>
+        </div>
+      </div>
+  
+      <!-- Email -->
+      <div class="form-group">
+        <label for="email">Email adresa</label>
+        <input 
+          type="email"
+          id="email"
+          formControlName="email"
+          class="form-control"
+          [ngClass]="{'is-invalid': registracijaForma.get('email')?.invalid && (registracijaForma.get('email')?.dirty || registracijaForma.get('email')?.touched)}">
+        <div *ngIf="registracijaForma.get('email')?.invalid && (registracijaForma.get('email')?.dirty || registracijaForma.get('email')?.touched)" class="invalid-feedback">
+          <div *ngIf="registracijaForma.get('email')?.errors?.['required']">
+            Email adresa je obavezna
+          </div>
+          <div *ngIf="registracijaForma.get('email')?.errors?.['email']">
+            Unesite validnu email adresu
+          </div>
+        </div>
+      </div>
+  
+      <!-- Lozinka -->
+      <div class="form-group">
+        <label for="lozinka">Lozinka</label>
+        <input 
+          type="password"
+          id="lozinka"
+          formControlName="lozinka"
+          class="form-control"
+          [ngClass]="{'is-invalid': registracijaForma.get('lozinka')?.invalid && (registracijaForma.get('lozinka')?.dirty || registracijaForma.get('lozinka')?.touched)}">
+        <div *ngIf="registracijaForma.get('lozinka')?.invalid && (registracijaForma.get('lozinka')?.dirty || registracijaForma.get('lozinka')?.touched)" class="invalid-feedback">
+          <div *ngIf="registracijaForma.get('lozinka')?.errors?.['required']">
+            Lozinka je obavezna
+          </div>
+          <div *ngIf="registracijaForma.get('lozinka')?.errors?.['minlength']">
+            Lozinka mora imati najmanje 6 karaktera
+          </div>
+        </div>
+      </div>
+  
+      <!-- Potvrda lozinke -->
+      <div class="form-group">
+        <label for="potvrdaLozinke">Potvrda lozinke</label>
+        <input 
+          type="password"
+          id="potvrdaLozinke"
+          formControlName="potvrdaLozinke"
+          class="form-control"
+          [ngClass]="{'is-invalid': registracijaForma.get('potvrdaLozinke')?.invalid && (registracijaForma.get('potvrdaLozinke')?.dirty || registracijaForma.get('potvrdaLozinke')?.touched)}">
+        <div *ngIf="registracijaForma.get('potvrdaLozinke')?.invalid && (registracijaForma.get('potvrdaLozinke')?.dirty || registracijaForma.get('potvrdaLozinke')?.touched)" class="invalid-feedback">
+          <div *ngIf="registracijaForma.get('potvrdaLozinke')?.errors?.['required']">
+            Potvrda lozinke je obavezna
+          </div>
+          <div *ngIf="registracijaForma.hasError('lozinkeSeNePodudaraju', ['potvrdaLozinke'])">
+            Lozinke se ne podudaraju
+          </div>
+        </div>
+      </div>
+  
+      <!-- Dugme za registraciju -->
+      <div class="form-group">
+        <button type="submit" class="btn" [disabled]="registracijaForma.invalid">
+          Registruj se
+        </button>
+      </div>
+  
+      <!-- Dugme za registraciju -->
+      <div class="form-group">
+        <div>
+          Imate nalog?
+        </div>
+        <button class="btn" (click)="prijaviSe()" >
+          Prijavi se
+        </button>
+      </div>
+    </form>
+  </div>
