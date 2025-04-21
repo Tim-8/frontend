@@ -1,8 +1,9 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RegistracijaZahtev } from '../model/registracijaZahtev';
-import { RegistrovaniKorisnikService } from '../services/registrovani-korisnik.service';
+import { RegistrovaniKorisnik } from '../model/registrovaniKorisnik';
+import { AuthService } from '../services/auth.service';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-registracija',
@@ -16,11 +17,12 @@ export class RegistracijaComponent {
   poslato = false;
 
   @Output()
-  noviKorisnik = new EventEmitter<RegistracijaZahtev>();
+  noviKorisnik = new EventEmitter<RegistrovaniKorisnik>();
 
   constructor(
     private formBuilder: FormBuilder,
-    private korisnikService: RegistrovaniKorisnikService
+    private router: Router,
+    private authService: AuthService
   ) {
     this.registracijaForma = this.formBuilder.group({
       korisnickoIme: ['', [Validators.required, Validators.minLength(3)]],
@@ -45,17 +47,17 @@ export class RegistracijaComponent {
       return;
     }
 
-    const registracijaZahtev: RegistracijaZahtev = {
+    const registrovaniKorisnik: RegistrovaniKorisnik = {
       id: 0,
       korisnickoIme: this.registracijaForma.value.korisnickoIme,
       lozinka: this.registracijaForma.value.lozinka,
       email: this.registracijaForma.value.email
     };
 
-    this.korisnikService.registruj(registracijaZahtev).subscribe({
+    this.authService.registruj(registrovaniKorisnik).subscribe({
       next: (odgovor) => {
         console.log('Uspešna registracija:', odgovor);
-        this.noviKorisnik.emit(registracijaZahtev);
+        this.noviKorisnik.emit(registrovaniKorisnik);
         this.registracijaForma.reset();
         this.poslato = false;
       },
@@ -65,7 +67,7 @@ export class RegistracijaComponent {
     });
   }
 
-  prijaviSe() {
-    
+  prijaviSe(): void {
+    this.router.navigate(['/prijava']);
   }
 }
