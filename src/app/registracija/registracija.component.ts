@@ -3,7 +3,9 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RegistrovaniKorisnik } from '../model/registrovaniKorisnik';
 import { AuthService } from '../services/auth.service';
-import { Router, RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
+import { Student } from '../model/student';
+import { Nastavnik } from '../model/nastavnik';
 
 @Component({
   selector: 'app-registracija',
@@ -14,7 +16,9 @@ import { Router, RouterModule } from '@angular/router';
 })
 export class RegistracijaComponent {
   registracijaForma: FormGroup;
+  userType: string ='STUDENT';
   poslato = false;
+  errorPoruka: string = '';
 
   @Output()
   noviKorisnik = new EventEmitter<RegistrovaniKorisnik>();
@@ -28,7 +32,11 @@ export class RegistracijaComponent {
       korisnickoIme: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
       lozinka: ['', [Validators.required, Validators.minLength(6)]],
-      potvrdaLozinke: ['', Validators.required]
+      potvrdaLozinke: ['', Validators.required],
+      ime: [''],
+      jmbg: ['', []],
+      biografija: [''],
+      userType: ['STUDENT', Validators.required]
     }, {
       validators: this.potvrdaLozinkeValidator
     });
@@ -41,31 +49,49 @@ export class RegistracijaComponent {
   }
 
   registrujSe() {
-    this.poslato = true;
+    if (this.registracijaForma.valid) {
+      this.poslato = true;
+      let user: Student | Nastavnik;
 
-    if (this.registracijaForma.invalid) {
-      return;
-    }
-
-    const registrovaniKorisnik: RegistrovaniKorisnik = {
-      id: 0,
-      korisnickoIme: this.registracijaForma.value.korisnickoIme,
-      lozinka: this.registracijaForma.value.lozinka,
-      email: this.registracijaForma.value.email
-    };
-
-    this.authService.registruj(registrovaniKorisnik).subscribe({
-      next: (odgovor) => {
-        console.log('Uspešna registracija:', odgovor);
-        this.noviKorisnik.emit(registrovaniKorisnik);
-        this.registracijaForma.reset();
-        this.poslato = false;
-      },
-      error: (err) => {
-        console.error('Greška pri registraciji:', err);
+      if (this.userType === 'STUDENT') {
+        user = {
+          id: 0,
+          korisnickoIme: this.registracijaForma.value.korisnickoIme,
+          lozinka: this.registracijaForma.value.lozinka,
+          email: this.registracijaForma.value.email,
+          ime: this.registracijaForma.value.ime,
+          jmbg: this.registracijaForma.value.jmbg
+        };
+      } else if (this.userType === 'NASTAVNIK') {
+        user = {
+          id: 0,
+          korisnickoIme: this.registracijaForma.value.korisnickoIme,
+          lozinka: this.registracijaForma.value.lozinka,
+          email: this.registracijaForma.value.email,
+          ime: this.registracijaForma.value.ime,
+          biografija: this.registracijaForma.value.biografija,
+          jmbg: this.registracijaForma.value.jmbg
+        }
+      } else {
+        return;
       }
-    });
+
+      this.authService.registrujKorisnika(user, this.userType).subscribe( 
+        () => {
+          this.router.navigate(['/prijava']);
+        },
+        (error) => {
+          this.errorPoruka = error.error.message || 'Greška pri registraciji.';
+        }
+      );
+    } else {
+      this.errorPoruka = 'Forma nije validna. Molimo proverite sva polja.';
+    }
   }
+
+  onRoleChange(event: any) {
+    this.userType = event.target.value;
+  } 
 
   prijaviSe(): void {
     this.router.navigate(['/prijava']);

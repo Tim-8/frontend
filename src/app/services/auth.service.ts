@@ -1,47 +1,45 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, tap } from 'rxjs';
-import { RegistrovaniKorisnik } from '../model/registrovaniKorisnik';
-import { JwtHelperService } from '@auth0/angular-jwt';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Student } from '../model/student';
+import { Nastavnik } from '../model/nastavnik';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root'
 })
-
 export class AuthService {
+    private apiUrl = 'http://localhost:8080/api/registrovaniKorisnici'; 
 
-  private userUrl: string;
+  constructor(private http: HttpClient) { }
 
-  constructor(private http: HttpClient) { 
-    this.userUrl = 'http://localhost:8080/api/registrovaniKorisnici';
+  prijavi(credentials: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/prijava`, credentials, { responseType: 'text' });
+  }
+
+  registrujKorisnika(user: Student | Nastavnik, userType: string): Observable<any> {
+    const endpoint = `${this.apiUrl}/registracija`;
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    const body = { ...user, userType: userType };
+    return this.http.post(endpoint, body, { headers: headers });
   }
 
-  registruj(noviKorisnik: RegistrovaniKorisnik): Observable<RegistrovaniKorisnik> {
-    return this.http.post<RegistrovaniKorisnik>(`${this.userUrl}/registracija`, noviKorisnik);
-  }
+  dobaviToken(): string | null {
+    return localStorage.getItem('jwtToken'); 
+  }
 
-  prijavi(credentials: { korisnickoIme: string, lozinka: string }): Observable<any> {
-    return this.http.post<any>(`${this.userUrl}/prijava`, credentials)
-      .pipe(
-        tap(response => {
-          localStorage.setItem('currentUser', JSON.stringify(response));
-          localStorage.setItem('auth_token', response.token);
-        })
-      );
-    }
+  sacuvajToken(token: string): void {
+    localStorage.setItem('jwtToken', token); 
+  }
 
-    isAuthenticated() : boolean {
-      const token = localStorage.getItem('authToken');
-      const helper = new JwtHelperService();
-      const isExpired = helper.isTokenExpired(token);
-      return !isExpired;
-    }
+  ukloniToken(): void {
+    localStorage.removeItem('jwtToken');
+  }
 
-    isLoggedIn(): boolean {
-      return localStorage.getItem('currentUser') !== null;
-    }
-
-    logout(): void {
-      localStorage.removeItem('currentUser');
-    }
+  dobaviRegistrovaneKorisnike(): Observable<any[]> {
+    const token = this.dobaviToken();
+    const headers = new HttpHeaders({
+    'Authorization': `Bearer ${token}`
+    });
+    return this.http.get<any[]>('http://localhost:8080/api/registrovaniKorisnici', { headers });
+  }
 }

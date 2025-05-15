@@ -1,5 +1,6 @@
-export interface Nastavnik {
-    id: Number,
+import { RegistrovaniKorisnik } from "./registrovaniKorisnik";
+
+export interface Nastavnik extends RegistrovaniKorisnik {
     ime: String,
     biografija: String,
     jmbg: String

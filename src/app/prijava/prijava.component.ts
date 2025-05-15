@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RegistrovaniKorisnikService } from '../services/registrovani-korisnik.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../services/auth.service';
@@ -41,7 +40,7 @@ export class PrijavaComponent {
     this.authService.prijavi(credentials).subscribe({
       next: (odgovor) => {
         console.log('Uspešna prijava:', odgovor);
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/registracija']);
       },
       error: (err) => {
         if (err.status === 401) {

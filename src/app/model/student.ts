@@ -1,5 +1,6 @@
-export interface Student {
-    id: Number,
-    jmbg: String,
-    ime: String
+import { RegistrovaniKorisnik } from "./registrovaniKorisnik";
+
+export interface Student extends RegistrovaniKorisnik {
+    ime: String,
+    jmbg: String
 }

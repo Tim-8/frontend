@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
   registrovaniKorisnici: RegistrovaniKorisnik[] = [];
  
   ngOnInit(): void {
-     this.dobaviRegistrovaneKorisnike();
+    this.dobaviRegistrovaneKorisnike();
   }
 
   dobaviRegistrovaneKorisnike(): void {
