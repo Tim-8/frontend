@@ -16,9 +16,9 @@ import { Nastavnik } from '../model/nastavnik';
 })
 export class RegistracijaComponent {
   registracijaForma: FormGroup;
-  userType: string ='STUDENT';
+  role: string ='STUDENT';
   poslato = false;
-  errorPoruka: string = '';
+  isAdministrator = false;
 
   @Output()
   noviKorisnik = new EventEmitter<RegistrovaniKorisnik>();
@@ -36,7 +36,7 @@ export class RegistracijaComponent {
       ime: [''],
       jmbg: ['', []],
       biografija: [''],
-      userType: ['STUDENT', Validators.required]
+      role: ['STUDENT', Validators.required]
     }, {
       validators: this.potvrdaLozinkeValidator
     });
@@ -53,7 +53,7 @@ export class RegistracijaComponent {
       this.poslato = true;
       let user: Student | Nastavnik;
 
-      if (this.userType === 'STUDENT') {
+      if (this.role === 'STUDENT') {
         user = {
           id: 0,
           korisnickoIme: this.registracijaForma.value.korisnickoIme,
@@ -62,7 +62,16 @@ export class RegistracijaComponent {
           ime: this.registracijaForma.value.ime,
           jmbg: this.registracijaForma.value.jmbg
         };
-      } else if (this.userType === 'NASTAVNIK') {
+
+        this.authService.registrujStudenta(user).subscribe( 
+        () => {
+          this.router.navigate(['/prijava']);
+        },
+        (error) => {
+            console.error('Greška prilikom registracije:', error);
+        }
+      );
+      } else if (this.role === 'NASTAVNIK') {
         user = {
           id: 0,
           korisnickoIme: this.registracijaForma.value.korisnickoIme,
@@ -72,25 +81,25 @@ export class RegistracijaComponent {
           biografija: this.registracijaForma.value.biografija,
           jmbg: this.registracijaForma.value.jmbg
         }
-      } else {
-        return;
-      }
 
-      this.authService.registrujKorisnika(user, this.userType).subscribe( 
+        this.authService.registrujNastavnika(user).subscribe( 
         () => {
           this.router.navigate(['/prijava']);
         },
         (error) => {
-          this.errorPoruka = error.error.message || 'Greška pri registraciji.';
+            console.error('Greška prilikom registracije:', error);
         }
       );
+      } else {
+        return;
+      }
     } else {
-      this.errorPoruka = 'Forma nije validna. Molimo proverite sva polja.';
+      console.error('Greška prilikom registracije:');
     }
   }
 
   onRoleChange(event: any) {
-    this.userType = event.target.value;
+    this.role = event.target.value;
   } 
 
   prijaviSe(): void {

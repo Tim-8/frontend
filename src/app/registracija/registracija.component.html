@@ -4,7 +4,7 @@
 
       <div class="form-group">
         <label for="tipKorisnika">Tip korisnika</label>
-        <select id="userType" formControlName="userType" (change)="onRoleChange($event)">
+        <select id="role" formControlName="role" (change)="onRoleChange($event)">
           <option value="" disabled>Izaberite tip korisnika</option>
           <option value="STUDENT">Student</option>
           <option value="NASTAVNIK">Nastavnik</option>
@@ -47,7 +47,7 @@
         </div>
       </div>
   
-      <div *ngIf="userType === 'STUDENT' || userType === 'NASTAVNIK'" class="form-group">
+      <div *ngIf="role === 'STUDENT' || role === 'NASTAVNIK'" class="form-group">
         <label for="ime">Ime</label>
         <input
           type="text"
@@ -62,7 +62,7 @@
         </div>
       </div>
 
-      <div *ngIf="userType === 'STUDENT' || userType === 'NASTAVNIK'" class="form-group">
+      <div *ngIf="role === 'STUDENT' || role === 'NASTAVNIK'" class="form-group">
         <label for="jmbg">Jmbg</label>
         <input
           type="text"
@@ -77,7 +77,7 @@
         </div>
       </div>
 
-      <div *ngIf="userType === 'NASTAVNIK'" class="form-group">
+      <div *ngIf="role === 'NASTAVNIK'" class="form-group">
         <label for="biografija">Biografija</label>
         <input
           type="text"

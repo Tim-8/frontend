@@ -17,8 +17,4 @@ export class RegistrovaniKorisnikService {
   getAll(): Observable<RegistrovaniKorisnik[]> {
     return this.http.get<RegistrovaniKorisnik[]>(this.userUrl);
   }
-  
-  create(korisnik: RegistrovaniKorisnik): Observable<RegistrovaniKorisnik> {
-    return this.http.post<RegistrovaniKorisnik>(this.userUrl, korisnik);
-  }
 }

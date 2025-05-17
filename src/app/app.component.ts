@@ -18,13 +18,5 @@ export class AppComponent implements OnInit {
   constructor(private registrovaniKorisnikService: RegistrovaniKorisnikService) {}
   registrovaniKorisnici: RegistrovaniKorisnik[] = [];
  
-  ngOnInit(): void {
-    this.dobaviRegistrovaneKorisnike();
-  }
-
-  dobaviRegistrovaneKorisnike(): void {
-    this.registrovaniKorisnikService.getAll().subscribe(registrovaniKorisnici => {
-      this.registrovaniKorisnici = registrovaniKorisnici;
-    })
-  }
+  ngOnInit(): void {}
 }

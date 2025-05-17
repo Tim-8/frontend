@@ -40,6 +40,8 @@ export class PrijavaComponent {
     this.authService.prijavi(credentials).subscribe({
       next: (odgovor) => {
         console.log('Uspešna prijava:', odgovor);
+        this.authService.sacuvajToken(odgovor);
+        this.authService.sacuvajUlogeIzTokena(odgovor)
         this.router.navigate(['/registracija']);
       },
       error: (err) => {
