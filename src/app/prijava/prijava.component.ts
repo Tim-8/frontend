@@ -39,16 +39,16 @@ export class PrijavaComponent {
    
     this.authService.prijavi(credentials).subscribe({
       next: (odgovor) => {
-        console.log('Uspešna prijava:', odgovor);
+        console.log('Uspesna prijava', odgovor);
         this.authService.sacuvajToken(odgovor);
         this.authService.sacuvajUlogeIzTokena(odgovor)
-        this.router.navigate(['/registracija']);
+        this.router.navigate(['/homepage']);
       },
       error: (err) => {
         if (err.status === 401) {
-          this.loginError = 'Neispravno korisničko ime ili lozinka';
+          this.loginError = 'Neispravno korisnicko ime ili lozinka';
         } else {
-          this.loginError = 'Došlo je do greške prilikom prijave. Pokušajte ponovo.';
+          this.loginError = 'Doslo je do greske prilikom prijave. Pokusajte ponovo.';
         }
       }
     })

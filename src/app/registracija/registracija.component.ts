@@ -68,7 +68,7 @@ export class RegistracijaComponent {
           this.router.navigate(['/prijava']);
         },
         (error) => {
-            console.error('Greška prilikom registracije:', error);
+            console.error('Greska prilikom registracije:', error);
         }
       );
       } else if (this.role === 'NASTAVNIK') {
@@ -84,17 +84,17 @@ export class RegistracijaComponent {
 
         this.authService.registrujNastavnika(user).subscribe( 
         () => {
-          this.router.navigate(['/prijava']);
+          this.router.navigate(['/homepage']);
         },
         (error) => {
-            console.error('Greška prilikom registracije:', error);
+            console.error('Greska prilikom registracije:', error);
         }
       );
       } else {
         return;
       }
     } else {
-      console.error('Greška prilikom registracije:');
+      console.error('Greska prilikom registracije:');
     }
   }
 

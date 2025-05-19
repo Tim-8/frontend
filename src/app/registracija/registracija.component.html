@@ -1,14 +1,16 @@
 <div class="registracija-container">
-    <h2>Registracija korisnika</h2>
+    <p class="subtitle">Registracija korisnika</p>
     <form [formGroup]="registracijaForma" (ngSubmit)="registrujSe()">
 
       <div class="form-group">
         <label for="tipKorisnika">Tip korisnika</label>
-        <select id="role" formControlName="role" (change)="onRoleChange($event)">
-          <option value="" disabled>Izaberite tip korisnika</option>
-          <option value="STUDENT">Student</option>
-          <option value="NASTAVNIK">Nastavnik</option>
-        </select>
+        <div class="select is-normal">
+          <select id="role" formControlName="role" (change)="onRoleChange($event)">
+            <option value="" disabled>Izaberite tip korisnika</option>
+            <option value="STUDENT">Student</option>
+            <option value="NASTAVNIK">Nastavnik</option>
+          </select>
+        </div>
       </div>
 
       <div class="form-group">

@@ -1,0 +1,16 @@
+.Podaci { 
+    text-align: left;
+    padding: 20px; 
+    border-radius: 5px; 
+    margin-top: 20px;
+}
+
+.subtitle { 
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+p { 
+    margin-bottom: 10px;
+    line-height: 1.5;
+}

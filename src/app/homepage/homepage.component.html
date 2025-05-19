@@ -1,0 +1,86 @@
+
+<section class="hero is-primary is-medium">
+  <div class="hero-head">
+    <nav class="navbar">
+      <div class="container">
+        <div class="navbar-brand">
+          <a class="navbar-item">
+            <img src="" alt="Logo" />
+          </a>
+          <span class="navbar-burger" data-target="navbarMenuHeroA">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+        </div>
+        <div id="navbarMenuHeroA" class="navbar-menu">
+          <div class="navbar-end">
+            <a class="navbar-item is-active"> Home </a>
+            <a class="navbar-item"> Examples </a>
+            <span class="navbar-item">
+              <a class="button is-info is-inverted">
+                <span class="icon">
+                  <i class="fab fa-github"></i>
+                </span>
+                <span (click)="registrujSe()">Registruj se</span>
+              </a>
+            </span>
+            <span class="navbar-item">
+              <a class="button is-info is-inverted">
+                <span class="icon">
+                  <i class="fab fa-github"></i>
+                </span>
+                <span (click)="prijaviSe()">Prijavi se</span>
+              </a>
+            </span>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <ng-container *ngIf="prikazaniSadrzaj === 'detalji'">
+        <p class="title">O Univerzitetu</p>
+        <p class="subtitle">Informacije o nasem univerzitetu...</p>
+      </ng-container>
+      <ng-container *ngIf="prikazaniSadrzaj === 'upis'">
+        <p class="title">Upis</p>
+        <p class="subtitle"></p>
+      </ng-container>
+    </div>
+  </div>
+
+  <div class="hero-foot">
+    <nav class="tabs is-boxed is-fullwidth">
+      <div class="container">
+        <ul>
+          <li [ngClass]="{'is-active': prikazaniSadrzaj === 'detalji'}">
+            <a href="/detalji" (click)="prikaziSadrzaj('detalji')">
+              O univerzitetu
+            </a>
+          </li>
+          <li [ngClass]="{'is-active': prikazaniSadrzaj === 'upis'}">
+            <a href="/upis"(click)="prikaziSadrzaj('upis')">Upis</a>
+          </li>
+          <li>
+            <a>Grid</a>
+          </li>
+          <li>
+            <a>Elements</a>
+          </li>
+          <li>
+            <a>Components</a>
+          </li>
+          <li>
+            <a>Layout</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</section>
+
+          
