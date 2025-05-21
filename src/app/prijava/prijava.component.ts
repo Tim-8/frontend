@@ -37,12 +37,21 @@ export class PrijavaComponent {
       lozinka: this.prijavaForma.get('lozinka')?.value
     }
    
-    this.authService.prijavi(credentials).subscribe({
-      next: (odgovor) => {
-        console.log('Uspesna prijava', odgovor);
-        this.authService.sacuvajToken(odgovor);
-        this.authService.sacuvajUlogeIzTokena(odgovor)
-        this.router.navigate(['/homepage']);
+   this.authService.prijavi(credentials).subscribe({
+      next: (jwtToken) => { 
+        console.log('Uspesna prijava. Token:', jwtToken);
+        if (jwtToken) {
+          this.authService.sacuvajToken(jwtToken);
+          this.authService.sacuvajUlogeIzTokena(jwtToken);
+
+          const storedRoles = localStorage.getItem('roles');
+
+          if (storedRoles && storedRoles.includes('ROLE_ADMIN')) {
+            this.router.navigate(['/aktivacija']);
+          } else {
+            this.router.navigate(['/homepage']);
+          }
+        } 
       },
       error: (err) => {
         if (err.status === 401) {

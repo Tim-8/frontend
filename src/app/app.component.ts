@@ -7,7 +7,7 @@ import { PrijavaComponent } from './prijava/prijava.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, RegistracijaComponent, PrijavaComponent],
+  imports: [RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -15,8 +15,6 @@ import { PrijavaComponent } from './prijava/prijava.component';
 export class AppComponent implements OnInit {
   title: string = 'frontend'
   message: string = '';
-  constructor(private registrovaniKorisnikService: RegistrovaniKorisnikService) {}
-  registrovaniKorisnici: RegistrovaniKorisnik[] = [];
- 
+
   ngOnInit(): void {}
 }
