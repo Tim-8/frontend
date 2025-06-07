@@ -3,17 +3,6 @@
     <form [formGroup]="registracijaForma" (ngSubmit)="registrujSe()">
 
       <div class="form-group">
-        <label for="tipKorisnika">Tip korisnika</label>
-        <div class="select is-normal">
-          <select id="role" formControlName="role" (change)="onRoleChange($event)">
-            <option value="" disabled>Izaberite tip korisnika</option>
-            <option value="STUDENT">Student</option>
-            <option value="NASTAVNIK">Nastavnik</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="form-group">
         <label for="korisnickoIme">Korisničko ime</label>
         <input 
           type="text"
@@ -45,51 +34,6 @@
           </div>
           <div *ngIf="registracijaForma.get('email')?.errors?.['email']">
             Unesite validnu email adresu
-          </div>
-        </div>
-      </div>
-  
-      <div *ngIf="role === 'STUDENT' || role === 'NASTAVNIK'" class="form-group">
-        <label for="ime">Ime</label>
-        <input
-          type="text"
-          id="ime"
-          formControlName="ime"
-          class="form-control"
-          [ngClass]="{'is-invalid': registracijaForma.get('ime')?.invalid && (registracijaForma.get('ime')?.dirty || registracijaForma.get('ime')?.touched)}">
-        <div *ngIf="registracijaForma.get('ime')?.invalid && (registracijaForma.get('ime')?.dirty || registracijaForma.get('ime')?.touched)" class="invalid-feedback">
-          <div *ngIf="registracijaForma.get('ime')?.errors?.['required']">
-            Ime je obavezno
-          </div>
-        </div>
-      </div>
-
-      <div *ngIf="role === 'STUDENT' || role === 'NASTAVNIK'" class="form-group">
-        <label for="jmbg">Jmbg</label>
-        <input
-          type="text"
-          id="jmbg"
-          formControlName="jmbg"
-          class="form-control"
-          [ngClass]="{'is-invalid': registracijaForma.get('jmbg')?.invalid && (registracijaForma.get('jmbg')?.dirty || registracijaForma.get('jmbg')?.touched)}">
-        <div *ngIf="registracijaForma.get('jmbg')?.invalid && (registracijaForma.get('jmbg')?.dirty || registracijaForma.get('jmbg')?.touched)" class="invalid-feedback">
-          <div *ngIf="registracijaForma.get('jmbg')?.errors?.['required']">
-            Jmbg je obavezno
-          </div>
-        </div>
-      </div>
-
-      <div *ngIf="role === 'NASTAVNIK'" class="form-group">
-        <label for="biografija">Biografija</label>
-        <input
-          type="text"
-          id="biografija"
-          formControlName="biografija"
-          class="form-control"
-          [ngClass]="{'is-invalid': registracijaForma.get('biografija')?.invalid && (registracijaForma.get('biografija')?.dirty || registracijaForma.get('biografija')?.touched)}">
-        <div *ngIf="registracijaForma.get('biografija')?.invalid && (registracijaForma.get('biografija')?.dirty || registracijaForma.get('biografija')?.touched)" class="invalid-feedback">
-          <div *ngIf="registracijaForma.get('biografija')?.errors?.['required']">
-            Biografija je obavezna
           </div>
         </div>
       </div>

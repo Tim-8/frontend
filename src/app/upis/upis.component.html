@@ -1,7 +1,45 @@
-<app-homepage></app-homepage>
+<app-homepage 
+  [title]="'Upis na univerzitet'"
+  [subtitle]="'Pronađi sve informacije o upisu'"
+  [backgroundUrl]="'/assets/images/image2.jpg'"></app-homepage>
 <section class="Podaci">
-    <div>
-        <p class="subtitle">Upis</p>
-        <p>O upisu</p>
+  <div class="container">
+    <h2 class="title is-3">Osnovne informacije o upisu</h2>
+    <p>
+    Prijava kandidata za upis na osnovne studije Univerziteta traje od <strong>1. jula do 15. jula</strong>.
+    Drugi upisni rok planiran je za početak septembra.
+    </p>
+    <p class="mt-3">
+    Za prijavu je potrebno dostaviti originalna svedočanstva svih razreda, diplomu srednje škole,
+    lični dokument, kao i dokaz o uplati troškova prijemnog ispita.
+    </p>
+
+    <h2 class="title is-3 mt-6">Fakulteti i studijski programi</h2>
+    <p>Odaberite jedan od fakulteta kako biste saznali više o programima, prijemnim ispitima i uslovima upisa:</p>
+   <div class="columns is-multiline mt-4">
+      <div class="column is-one-third">
+        <a routerLink="/fakulteti/ftn" class="box has-text-centered is-clickable">
+          <strong>Fakultet tehničkih nauka</strong><br />
+          Softversko inženjerstvo, Elektrotehnika, Mehatronika
+        </a>
+      </div>
+      <div class="column is-one-third">
+        <a routerLink="/fakulteti/ekonomski" class="box has-text-centered is-clickable">
+          <strong>Ekonomski fakultet</strong><br />
+          Ekonomija, Menadžment, Računovodstvo
+        </a>
+      </div>
+      <div class="column is-one-third">
+        <a routerLink="/fakulteti/pravni" class="box has-text-centered is-clickable">
+          <strong>Pravni fakultet</strong><br />
+          Pravo, Međunarodno pravo, Bezbednost
+        </a>
+      </div>
     </div>
+
+    <div class="buttons mt-5">
+      <a class="button is-primary" routerLink="/prijava">Prijavi se online</a>
+      <a class="button is-link is-light" routerLink="/kontakt">Kontaktiraj univerzitet</a>
+    </div>
+  </div>
 </section>

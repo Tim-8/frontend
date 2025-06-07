@@ -1,6 +1,7 @@
 export interface RegistrovaniKorisnik {
-    id: Number,
+    id: number,
     korisnickoIme: String,
     lozinka: String,
-    email: String
+    email: String,
+    aktivan: boolean
 }

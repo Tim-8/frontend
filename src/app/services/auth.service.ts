@@ -1,84 +1,64 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, map } from 'rxjs';
+import { Observable, map, tap } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
-import { Student } from '../model/student';
-import { Nastavnik } from '../model/nastavnik';
+import { RegistrovaniKorisnik } from '../model/registrovaniKorisnik';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:8080/api';
+  private apiUrl = 'http://localhost:8080/api/registrovaniKorisnici';
 
   constructor(
     private http: HttpClient,
     private jwtHelper: JwtHelperService
   ) { }
 
-  prijavi(credentials: any): Observable<string> {
+  login(credentials: any): Observable<string> {
     return this.http.post<{ token: string }>(`${this.apiUrl}/prijava`, credentials)
               .pipe(
-                map(response => response.token) 
+                map(response => response.token),
+                tap(token => this.saveToken(token)) 
               );
   }
 
-  registrujStudenta(student: Student): Observable<any> {
-    const endpoint = `${this.apiUrl}/registracija/student`;
-    const token = this.dobaviToken();
+  registerUser(user: RegistrovaniKorisnik): Observable<any> {
+    const endpoint = `${this.apiUrl}/registracija`;
     const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
+      'Content-Type': 'application/json'
     });
-    return this.http.post(endpoint, student, { headers: headers });
+    return this.http.post(endpoint, user, { headers: headers });
   }
 
-  registrujNastavnika(nastavnik: Nastavnik): Observable<any> {
-    const endpoint = `${this.apiUrl}/registracija/nastavnik`;
-    const token = this.dobaviToken();
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
-    });
-    return this.http.post(endpoint, nastavnik, { headers: headers });
-  }
-
-  dobaviToken(): string | null {
+  getToken(): string | null {
     return localStorage.getItem('jwtToken');
   }
 
-  sacuvajToken(token: string): void {
+  saveToken(token: string): void {
+    const decodedToken = this.jwtHelper.decodeToken(token);
+    const roles = decodedToken?.roles;
+
+    if (roles) {
+      localStorage.setItem('roles', Array.isArray(roles) ? roles.join(',') : String(roles));
+    } else {
+      localStorage.removeItem('roles');
+    }
+
     localStorage.setItem('jwtToken', token);
   }
 
-  sacuvajUlogeIzTokena(token: string): void {
-    try {
-      const decodedToken = this.jwtHelper.decodeToken(token);
-      const roles = decodedToken?.roles;
-
-      if (roles) {
-        localStorage.setItem('roles', Array.isArray(roles) ? roles.join(',') : String(roles));
-      } else {
-        localStorage.removeItem('roles');
-      }
-    } catch (error) {
-      console.error('Greska pri dekodovanju tokena:', error);
-      localStorage.removeItem('roles');
-    }
+  isLoggedIn(): boolean {
+    return this.getToken() !== null;
   }
 
-  ukloniToken(): void {
+  deleteToken(): void {
     localStorage.removeItem('jwtToken');
     localStorage.removeItem('roles');
   }
 
-  jePrijavljen(): boolean {
-    const token = this.dobaviToken();
-    return !!token;
-  }
-
-  imaUlogu(uloge: string[]): boolean {
+  hasRole(uloge: string[]): boolean {
     const rolesString = localStorage.getItem('roles');
     if (!rolesString) {
       return false;

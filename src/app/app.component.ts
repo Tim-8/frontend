@@ -1,9 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { RegistrovaniKorisnikService } from './services/registrovani-korisnik.service';
-import { RegistrovaniKorisnik } from './model/registrovaniKorisnik';
-import { RegistracijaComponent } from './registracija/registracija.component';
-import { PrijavaComponent } from './prijava/prijava.component';
 
 @Component({
   selector: 'app-root',

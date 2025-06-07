@@ -1,3 +1,7 @@
+.app-homepage {
+    background-image: url('/assets/images/image2.jpg') !important;    
+}
+
 .Podaci { 
     text-align: left;
     padding: 20px; 

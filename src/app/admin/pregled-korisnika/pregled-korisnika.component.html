@@ -1,0 +1,15 @@
+<p class="subtitle">Registrovani korisnici</p>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Korisnicko ime</th>
+      <th>Email</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let registrovaniKorisnik of registrovaniKorisnici">
+      <td>{{ registrovaniKorisnik.korisnickoIme }}</td>
+      <td>{{ registrovaniKorisnik.email }}</td>
+    </tr>
+  </tbody>
+</table>

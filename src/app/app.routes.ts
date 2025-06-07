@@ -5,17 +5,30 @@ import { RegistracijaComponent } from './registracija/registracija.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { DetaljiComponent } from './detalji/detalji.component';
 import { UpisComponent } from './upis/upis.component';
-import { AktivacijaComponent } from './aktivacija/aktivacija.component';
+import { AktivacijaComponent } from './admin/aktivacija/aktivacija.component';
+import { FakultetDetaljiComponent } from './fakulteti/fakultet-detalji/fakultet-detalji.component';
+import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
+import { NastavnikFormaComponent } from './nastavnik-forma/nastavnik-forma.component';
+import { PregledKorisnikaComponent } from './admin/pregled-korisnika/pregled-korisnika.component';
+import { StudijskiProgramComponent } from './admin/studijski-program/studijski-program.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'homepage', pathMatch: 'full' },
     { path: 'homepage', component: HomepageComponent },
     { path: 'prijava', component: PrijavaComponent },
+    { path: 'registracija', component: RegistracijaComponent },
     { path: 'detalji', component: DetaljiComponent },
     { path: 'upis', component: UpisComponent },
-    { path: 'registracija', component: RegistracijaComponent },
+    { path: 'fakulteti', component: FakultetDetaljiComponent },
     { 
-        path: 'aktivacija', component: AktivacijaComponent, 
+        path: 'admin-dashboard', component: AdminDashboardComponent,
+        children: [
+            { path: '', redirectTo: 'aktivacija', pathMatch: 'full' },
+            { path: 'pregled-korisnika', component: PregledKorisnikaComponent }, 
+            { path: 'aktivacija', component: AktivacijaComponent },
+            { path: 'nastavnik-forma', component: NastavnikFormaComponent },
+            { path: 'studijski-program', component: StudijskiProgramComponent }, 
+        ],
         data: { requiredRoles: ["ROLE_ADMIN"] }, canActivate: [authGuard]
     }
 ];

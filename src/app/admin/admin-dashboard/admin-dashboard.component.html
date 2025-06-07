@@ -1,0 +1,14 @@
+<div class="layout-container">
+  <button class="button is-primary menu-toggle-btn" (click)="toggleMenu()"
+          [class.menu-collapsed]="isMenuCollapsed">
+    <span class="icon">
+      <i class="fa-solid fa-bars"></i>
+    </span>
+  </button>
+
+  <app-admin-menu [class.collapsed]="isMenuCollapsed"></app-admin-menu>
+
+  <div class="main-content" [class.menu-collapsed]="isMenuCollapsed">
+    <router-outlet></router-outlet>
+  </div>
+</div>

@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { RegistrovaniKorisnik } from '../model/registrovaniKorisnik';
@@ -8,13 +7,13 @@ import { RegistrovaniKorisnik } from '../model/registrovaniKorisnik';
 })
 export class RegistrovaniKorisnikService {
 
-  private userUrl: string;
+  constructor() { }
 
-  constructor(private http: HttpClient) { 
-    this.userUrl = 'http://localhost:8080/api/registrovaniKorisnici';
-  }
+  // getCurrentUser(): Observable<RegistrovaniKorisnik> {
 
-  getAll(): Observable<RegistrovaniKorisnik[]> {
-    return this.http.get<RegistrovaniKorisnik[]>(this.userUrl);
-  }
+  // }
+
+  // updateCurrentUser() {}
+
+  // changePassword() {}
 }

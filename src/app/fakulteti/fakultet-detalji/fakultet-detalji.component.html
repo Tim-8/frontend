@@ -1,0 +1,35 @@
+<div *ngIf="fakultet" class="container section">
+    <div class="box">
+        <h1 class="title is-2 has-text-centered">{{ fakultet.naziv }}</h1>
+        <hr>
+        <p class="subtitle is-4">Detalji fakulteta:</p>
+        <p><strong>Opis:</strong> {{ fakultet.opis }}</p>
+        
+        <p><strong>Lokacija:</strong> 
+            <span *ngIf="fakultet.adresa">{{ fakultet.adresa.ulica }} {{ fakultet.adresa.broj }}</span>, 
+            <span *ngIf="fakultet.adresa && fakultet.adresa.mesto">{{ fakultet.adresa.mesto.naziv }}</span> 
+            <span *ngIf="fakultet.adresa && fakultet.adresa.mesto && fakultet.adresa.mesto.drzava">({{ fakultet.adresa.mesto.drzava.naziv }})</span>
+        </p>
+        
+        <p><strong>Dekan:</strong> 
+            <span *ngIf="fakultet.dekan">{{ fakultet.dekan.ime }}</span>
+        </p>
+
+        <h2 class="title is-4 mt-5">Studijski programi:</h2>
+        <div *ngIf="fakultet.studijskiProgrami && fakultet.studijskiProgrami.length > 0; else noPrograms">
+            <ul>
+                <li *ngFor="let sp of fakultet.studijskiProgrami">
+                    <strong>{{ sp.naziv }}</strong>: {{ sp.opis }}
+                    <span *ngIf="sp.rukovodilac"> (Rukovodilac: {{ sp.rukovodilac }})</span>
+                </li>
+            </ul>
+        </div>
+        <ng-template #noPrograms>
+            <p>Trenutno nema dostupnih studijskih programa za ovaj fakultet.</p>
+        </ng-template>
+
+        <div class="has-text-centered mt-5">
+            <button class="button is-link" (click)="goBack()">Nazad na početnu</button>
+        </div>
+    </div>
+</div>

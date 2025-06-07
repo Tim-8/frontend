@@ -1,11 +1,16 @@
-
-<section class="hero is-primary is-medium">
+<section class="hero is-primary is-medium"
+[ngStyle]="{
+    'background-image': 'url(' + backgroundUrl + ')',
+    'background-size': 'cover',
+    'background-position': 'center center'
+  }">
+  <!-- Hero head: will stick at the top -->
   <div class="hero-head">
     <nav class="navbar">
       <div class="container">
         <div class="navbar-brand">
           <a class="navbar-item">
-            <img src="" alt="Logo" />
+            <img src="https://bulma.io/assets/images/bulma-type-white.png" alt="Logo" />
           </a>
           <span class="navbar-burger" data-target="navbarMenuHeroA">
             <span></span>
@@ -16,22 +21,16 @@
         </div>
         <div id="navbarMenuHeroA" class="navbar-menu">
           <div class="navbar-end">
-            <a class="navbar-item is-active"> Home </a>
+            <a class="navbar-item is-active" routerLink="/homepage"> Home </a>
             <a class="navbar-item"> Examples </a>
             <span class="navbar-item">
-              <a class="button is-info is-inverted">
-                <span class="icon">
-                  <i class="fab fa-github"></i>
-                </span>
-                <span (click)="registrujSe()">Registruj se</span>
+              <a class="button is-primary is-inverted" routerLink="/prijava">
+                <span>Prijavi se</span>
               </a>
             </span>
             <span class="navbar-item">
-              <a class="button is-info is-inverted">
-                <span class="icon">
-                  <i class="fab fa-github"></i>
-                </span>
-                <span (click)="prijaviSe()">Prijavi se</span>
+              <a class="button is-primary is-inverted" routerLink="/registracija">
+                <span>Registruj se</span>
               </a>
             </span>
           </div>
@@ -40,47 +39,33 @@
     </nav>
   </div>
 
+  <!-- Hero content: will be in the middle -->
   <div class="hero-body">
     <div class="container has-text-centered">
-      <ng-container *ngIf="prikazaniSadrzaj === 'detalji'">
-        <p class="title">O Univerzitetu</p>
-        <p class="subtitle">Informacije o nasem univerzitetu...</p>
-      </ng-container>
-      <ng-container *ngIf="prikazaniSadrzaj === 'upis'">
-        <p class="title">Upis</p>
-        <p class="subtitle"></p>
-      </ng-container>
+      <p class="title">{{ title }}</p>
+      <p class="subtitle">{{ subtitle }}</p>
     </div>
   </div>
 
+  <!-- Hero footer: navbar dropdown -->
   <div class="hero-foot">
-    <nav class="tabs is-boxed is-fullwidth">
+    <nav class="navbar is-primary">
       <div class="container">
-        <ul>
-          <li [ngClass]="{'is-active': prikazaniSadrzaj === 'detalji'}">
-            <a href="/detalji" (click)="prikaziSadrzaj('detalji')">
-              O univerzitetu
-            </a>
-          </li>
-          <li [ngClass]="{'is-active': prikazaniSadrzaj === 'upis'}">
-            <a href="/upis"(click)="prikaziSadrzaj('upis')">Upis</a>
-          </li>
-          <li>
-            <a>Grid</a>
-          </li>
-          <li>
-            <a>Elements</a>
-          </li>
-          <li>
-            <a>Components</a>
-          </li>
-          <li>
-            <a>Layout</a>
-          </li>
-        </ul>
+        <div class="navbar-menu">
+          <div class="navbar-start">
+            <a class="navbar-item" routerLink="/detalji" routerLinkActive="is-active">O univerzitetu</a>
+            <a class="navbar-item" routerLink="/upis" routerLinkActive="is-active">Upis</a>
+
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link">Fakultet</a>
+              <div class="navbar-dropdown">
+                  <a *ngFor="let fakultet of fakulteti" [routerLink]="['/fakulteti', fakultet.id]" class="navbar-item">{{ fakultet.naziv }}</a>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </nav>
   </div>
-</section>
 
-          
+</section>
