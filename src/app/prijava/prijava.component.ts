@@ -44,7 +44,7 @@ export class PrijavaComponent {
         } else if (this.authService.hasRole(['ROLE_OSOBLJE'])) {
           this.router.navigate(['/osoblje-dashboard']);
         } else {
-          this.router.navigate(['/homepage']);
+          this.router.navigate(['/detalji']);
         } 
       },
       error: (err) => {

@@ -17,7 +17,7 @@ export class HomepageComponent {
   @Input() title: string = 'Univerzitet Novi Sad';
   @Input() subtitle: string = '';
   @Input() color: string = '';
-  @Input() backgroundUrl: string = '/assets/images/image1.jpg';
+  @Input() backgroundUrl: string = '/assets/images/image.jpg';
   
   fakulteti: Fakultet[] = [];
   studijskiProgrami: StudijskiProgram[] = [];

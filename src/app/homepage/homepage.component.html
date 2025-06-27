@@ -61,29 +61,29 @@
 
   <!-- Hero footer: navbar dropdown -->
   <div class="hero-foot">
-    <nav class="navbar is-primary">
+    <nav class="tabs is-boxed">
       <div class="container">
-        <div class="navbar-menu">
-          <div class="navbar-start">
-            <div class="navbar is-hoverable"></div>
-            <a class="navbar-item" routerLink="/detalji" routerLinkActive="is-active">O univerzitetu</a>
-            <a class="navbar-item" routerLink="/upis" routerLinkActive="is-active">Upis</a>
-
+        <ul>
+          <li routerLinkActive="is-active">
+            <a class="navbar-item" routerLink="/detalji">O univerzitetu</a>
+          </li>
+          <li routerLinkActive="is-active">
             <div class="navbar-item has-dropdown is-hoverable">
               <a class="navbar-link">Fakultet</a>
               <div class="navbar-dropdown">
-                  <a *ngFor="let fakultet of fakulteti" [routerLink]="['/fakulteti', fakultet.id]" class="navbar-item">{{ fakultet.naziv }}</a>
+                <a class="navbar-item" *ngFor="let fakultet of fakulteti" [routerLink]="['/fakulteti', fakultet.id]" >{{ fakultet.naziv }}</a>
               </div>
             </div>
-
+          </li>
+          <li routerLinkActive="is-active">
             <div class="navbar-item has-dropdown is-hoverable">
               <a class="navbar-link">Studijski program</a>
               <div class="navbar-dropdown">
-                  <a *ngFor="let sp of studijskiProgrami" [routerLink]="['/studijskiProgrami', sp.id]" class="navbar-item">{{ sp.naziv }}</a>
+                <a class="navbar-item"  *ngFor="let sp of studijskiProgrami" [routerLink]="['/studijskiProgrami', sp.id]" >{{ sp.naziv }}</a>
               </div>
             </div>
-          </div>
-        </div>
+          </li>
+        </ul>
       </div>
     </nav>
   </div>
