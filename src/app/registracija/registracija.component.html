@@ -1,6 +1,6 @@
 <div class="registracija-container">
     <p class="subtitle">Registracija korisnika</p>
-    <form [formGroup]="registracijaForma" (ngSubmit)="registrujSe()">
+    <form [formGroup]="registracijaForm" (ngSubmit)="registrujSe()">
 
       <div class="form-group">
         <label for="korisnickoIme">Korisničko ime</label>
@@ -9,12 +9,12 @@
           id="korisnickoIme"
           formControlName="korisnickoIme"
           class="form-control"
-          [ngClass]="{'is-invalid': registracijaForma.get('korisnickoIme')?.invalid && (registracijaForma.get('korisnickoIme')?.dirty || registracijaForma.get('korisnickoIme')?.touched)}">
-        <div *ngIf="registracijaForma.get('korisnickoIme')?.invalid && (registracijaForma.get('korisnickoIme')?.dirty || registracijaForma.get('korisnickoIme')?.touched)" class="invalid-feedback">
-          <div *ngIf="registracijaForma.get('korisnickoIme')?.errors?.['required']">
+          [ngClass]="{'is-invalid': registracijaForm.get('korisnickoIme')?.invalid && (registracijaForm.get('korisnickoIme')?.dirty || registracijaForm.get('korisnickoIme')?.touched)}">
+        <div *ngIf="registracijaForm.get('korisnickoIme')?.invalid && (registracijaForm.get('korisnickoIme')?.dirty || registracijaForm.get('korisnickoIme')?.touched)" class="invalid-feedback">
+          <div *ngIf="registracijaForm.get('korisnickoIme')?.errors?.['required']">
             Korisničko ime je obavezno
           </div>
-          <div *ngIf="registracijaForma.get('korisnickoIme')?.errors?.['minlength']">
+          <div *ngIf="registracijaForm.get('korisnickoIme')?.errors?.['minlength']">
             Korisničko ime mora imati najmanje 3 karaktera
           </div>
         </div>
@@ -27,12 +27,12 @@
           id="email"
           formControlName="email"
           class="form-control"
-          [ngClass]="{'is-invalid': registracijaForma.get('email')?.invalid && (registracijaForma.get('email')?.dirty || registracijaForma.get('email')?.touched)}">
-        <div *ngIf="registracijaForma.get('email')?.invalid && (registracijaForma.get('email')?.dirty || registracijaForma.get('email')?.touched)" class="invalid-feedback">
-          <div *ngIf="registracijaForma.get('email')?.errors?.['required']">
+          [ngClass]="{'is-invalid': registracijaForm.get('email')?.invalid && (registracijaForm.get('email')?.dirty || registracijaForm.get('email')?.touched)}">
+        <div *ngIf="registracijaForm.get('email')?.invalid && (registracijaForm.get('email')?.dirty || registracijaForm.get('email')?.touched)" class="invalid-feedback">
+          <div *ngIf="registracijaForm.get('email')?.errors?.['required']">
             Email adresa je obavezna
           </div>
-          <div *ngIf="registracijaForma.get('email')?.errors?.['email']">
+          <div *ngIf="registracijaForm.get('email')?.errors?.['email']">
             Unesite validnu email adresu
           </div>
         </div>
@@ -45,12 +45,12 @@
           id="lozinka"
           formControlName="lozinka"
           class="form-control"
-          [ngClass]="{'is-invalid': registracijaForma.get('lozinka')?.invalid && (registracijaForma.get('lozinka')?.dirty || registracijaForma.get('lozinka')?.touched)}">
-        <div *ngIf="registracijaForma.get('lozinka')?.invalid && (registracijaForma.get('lozinka')?.dirty || registracijaForma.get('lozinka')?.touched)" class="invalid-feedback">
-          <div *ngIf="registracijaForma.get('lozinka')?.errors?.['required']">
+          [ngClass]="{'is-invalid': registracijaForm.get('lozinka')?.invalid && (registracijaForm.get('lozinka')?.dirty || registracijaForm.get('lozinka')?.touched)}">
+        <div *ngIf="registracijaForm.get('lozinka')?.invalid && (registracijaForm.get('lozinka')?.dirty || registracijaForm.get('lozinka')?.touched)" class="invalid-feedback">
+          <div *ngIf="registracijaForm.get('lozinka')?.errors?.['required']">
             Lozinka je obavezna
           </div>
-          <div *ngIf="registracijaForma.get('lozinka')?.errors?.['minlength']">
+          <div *ngIf="registracijaForm.get('lozinka')?.errors?.['minlength']">
             Lozinka mora imati najmanje 6 karaktera
           </div>
         </div>
@@ -63,19 +63,19 @@
           id="potvrdaLozinke"
           formControlName="potvrdaLozinke"
           class="form-control"
-          [ngClass]="{'is-invalid': registracijaForma.get('potvrdaLozinke')?.invalid && (registracijaForma.get('potvrdaLozinke')?.dirty || registracijaForma.get('potvrdaLozinke')?.touched)}">
-        <div *ngIf="registracijaForma.get('potvrdaLozinke')?.invalid && (registracijaForma.get('potvrdaLozinke')?.dirty || registracijaForma.get('potvrdaLozinke')?.touched)" class="invalid-feedback">
-          <div *ngIf="registracijaForma.get('potvrdaLozinke')?.errors?.['required']">
+          [ngClass]="{'is-invalid': registracijaForm.get('potvrdaLozinke')?.invalid && (registracijaForm.get('potvrdaLozinke')?.dirty || registracijaForm.get('potvrdaLozinke')?.touched)}">
+        <div *ngIf="registracijaForm.get('potvrdaLozinke')?.invalid && (registracijaForm.get('potvrdaLozinke')?.dirty || registracijaForm.get('potvrdaLozinke')?.touched)" class="invalid-feedback">
+          <div *ngIf="registracijaForm.get('potvrdaLozinke')?.errors?.['required']">
             Potvrda lozinke je obavezna
           </div>
-          <div *ngIf="registracijaForma.hasError('lozinkeSeNePodudaraju', ['potvrdaLozinke'])">
+          <div *ngIf="registracijaForm.hasError('lozinkeSeNePodudaraju', ['potvrdaLozinke'])">
             Lozinke se ne podudaraju
           </div>
         </div>
       </div>
   
       <div class="form-group"> 
-        <button type="submit" class="btn" [disabled]="registracijaForma.invalid">
+        <button type="submit" class="btn" [disabled]="registracijaForm.invalid">
           Registruj se
         </button>
       </div>

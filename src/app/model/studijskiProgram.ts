@@ -3,8 +3,8 @@ import { Nastavnik } from "./nastavnik";
 
 export interface StudijskiProgram {
     id: number,
-    naziv: String,
+    naziv: string,
     fakultet: Fakultet,
     rukovodilac: Nastavnik,
-    opis: String
+    opis: string
 }

@@ -1,0 +1,64 @@
+<div class="zvanje-forma-container">
+  <form [formGroup]="zvanjeForm">
+
+    <div class="form-group">
+      <label for="DatumIzbora">Datum izbora</label>
+      <input
+        type="date"
+        id="datumIzbora"
+        formControlName="datumIzbora"
+        class="form-control"
+        [ngClass]="{'is-invalid': zvanjeForm.get('datumIzbora')?.invalid && (zvanjeForm.get('datumIzbora')?.dirty || zvanjeForm.get('datumIzbora')?.touched)}" >
+        <div *ngIf="zvanjeForm.get('datumIzbora')?.invalid && (zvanjeForm.get('datumIzbora')?.dirty && zvanjeForm.get('datumIzbora')?.touched)">
+          <div *ngIf="zvanjeForm.get('datumIzbora')?.errors?.['required']">
+            Datum izbora je obavezan
+          </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+      <label for="DatumPrestanka">Datum prestanka</label>
+      <input
+        type="date"
+        id="datumPrestanka"
+        formControlName="datumPrestanka"
+        class="form-control"
+        [ngClass]="{'is-invalid': zvanjeForm.get('datumPrestanka')?.invalid && (zvanjeForm.get('datumPrestanka')?.dirty || zvanjeForm.get('datumPrestanka')?.touched)}" >
+        <div *ngIf="zvanjeForm.get('datumPrestanka')?.invalid && (zvanjeForm.get('datumPrestanka')?.dirty && zvanjeForm.get('datumPrestanka')?.touched)">
+          <div *ngIf="zvanjeForm.get('datumPrestanka')?.errors?.['required']">
+            Datum prestanka je obavezan
+          </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+      <label for="TipZvanja">Tip zvanja</label>
+      <input
+        type="text"
+        id="tipZvanja"
+        formControlName="tipZvanja"
+        class="form-control"
+        [ngClass]="{'is-invalid': zvanjeForm.get('tipZvanja')?.invalid && (zvanjeForm.get('tipZvanja')?.dirty || zvanjeForm.get('tipZvanja')?.touched)}" >
+        <div *ngIf="zvanjeForm.get('tipZvanja')?.invalid && (zvanjeForm.get('tipZvanja')?.dirty && zvanjeForm.get('tipZvanja')?.touched)">
+          <div *ngIf="zvanjeForm.get('tipZvanja')?.errors?.['required']">
+            Tip zvanja je obavezna
+          </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+      <label for="NaucnaOblast">Naucna oblast</label>
+      <input
+        type="text"
+        id="naucnaOblast"
+        formControlName="naucnaOblast"
+        class="form-control"
+        [ngClass]="{'is-invalid': zvanjeForm.get('naucnaOblast')?.invalid && (zvanjeForm.get('naucnaOblast')?.dirty || zvanjeForm.get('naucnaOblast')?.touched)}" >
+        <div *ngIf="zvanjeForm.get('naucnaOblast')?.invalid && (zvanjeForm.get('naucnaOblast')?.dirty && zvanjeForm.get('naucnaOblast')?.touched)">
+          <div *ngIf="zvanjeForm.get('naucnaOblast')?.errors?.['required']">
+            Naucna oblast je obavezna
+          </div>
+        </div>
+    </div>
+  </form>
+</div>

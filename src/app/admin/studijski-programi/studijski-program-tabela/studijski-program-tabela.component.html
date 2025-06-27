@@ -1,0 +1,24 @@
+<p class="subtitle">Studijski programi</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Naziv</th>
+            <th>Fakultet</th>
+            <th>Rukovodilac</th>
+            <th>Opis</th>
+            <th>Akcije</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let studijskiProgram of studijskiProgrami">
+            <td>{{ studijskiProgram.naziv }} </td>
+            <td>{{ studijskiProgram.fakultet.naziv }}</td>
+            <td>{{ studijskiProgram.rukovodilac.ime }}</td>
+            <td class="skraceni-tekst">{{ studijskiProgram.opis }}</td>
+            <td>
+                <button (click)="izmeni(studijskiProgram)">Izmeni</button>
+                <button (click)="izbrisi(studijskiProgram.id)">Izbrisi</button>
+            </td>
+        </tr>
+    </tbody>
+</table>

@@ -1,11 +1,9 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RegistrovaniKorisnik } from '../model/registrovaniKorisnik';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
-import { Student } from '../model/student';
-import { Nastavnik } from '../model/nastavnik';
 
 @Component({
   selector: 'app-registracija',
@@ -15,9 +13,7 @@ import { Nastavnik } from '../model/nastavnik';
   styleUrls: ['./registracija.component.css']
 })
 export class RegistracijaComponent {
-  registracijaForma: FormGroup;
-  poslato = false;
-  isAdministrator = false;
+  registracijaForm: FormGroup;
 
   @Output()
   noviKorisnik = new EventEmitter<RegistrovaniKorisnik>();
@@ -27,7 +23,7 @@ export class RegistracijaComponent {
     private router: Router,
     private authService: AuthService
   ) {
-    this.registracijaForma = this.formBuilder.group({
+    this.registracijaForm = this.formBuilder.group({
       korisnickoIme: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
       lozinka: ['', [Validators.required, Validators.minLength(6)]],
@@ -38,22 +34,21 @@ export class RegistracijaComponent {
     });
   }
 
-  potvrdaLozinkeValidator(grupa: FormGroup) {
-    const lozinka = grupa.get('lozinka')?.value;
-    const potvrdaLozinke = grupa.get('potvrdaLozinke')?.value;
+  potvrdaLozinkeValidator(form: FormGroup) {
+    const lozinka = form.get('lozinka')?.value;
+    const potvrdaLozinke = form.get('potvrdaLozinke')?.value;
     return lozinka === potvrdaLozinke ? null : { lozinkeSeNePodudaraju: true };
   }
 
   registrujSe() {
-    if (this.registracijaForma.valid) {
-      this.poslato = true;
+    if (this.registracijaForm.valid) {
       let user: RegistrovaniKorisnik;
 
       user = {
         id: 0,
-        korisnickoIme: this.registracijaForma.value.korisnickoIme,
-        lozinka: this.registracijaForma.value.lozinka,
-        email: this.registracijaForma.value.email,
+        korisnickoIme: this.registracijaForm.value.korisnickoIme,
+        lozinka: this.registracijaForm.value.lozinka,
+        email: this.registracijaForm.value.email,
         aktivan: false
       };
 
@@ -66,7 +61,7 @@ export class RegistracijaComponent {
         }
       );
     } else {
-      console.error('Greska prilikom registracije:');
+      alert('Forma nije validna. Proverite polja.');
     }
   }
 

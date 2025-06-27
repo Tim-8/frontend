@@ -3,16 +3,19 @@
     <p class="menu-label">Administration</p>
     <ul class="menu-list">
         <li>
-        <a class="is-active">Registrovani korisnici</a>
+        <a>Registrovani korisnici</a>
         <ul>
-            <li><a class="navbar-item" routerLink="/admin-dashboard/pregled-korisnika">Pregled korisnika</a></li>
-            <li><a class="navbar-item" routerLink="/admin-dashboard/aktivacija">Aktiviraj nalog</a></li>
-            <li><a class="navbar-item" routerLink="/admin-dashboard/nastavnik-forma">Dodaj nastavnika</a></li>
-            <li><a>Dodaj osoblje</a></li>
+            <li><a class="navbar-item" routerLink="/admin-dashboard/pregled-korisnika" routerLinkActive="is-active">Pregled korisnika</a></li>
+            <li><a class="navbar-item" routerLink="/admin-dashboard/aktivacija" routerLinkActive="is-active">Aktiviraj nalog</a></li>
+            <li><a class="navbar-item" routerLink="/admin-dashboard/nastavnik-forma" routerLinkActive="is-active">Dodaj nastavnika</a></li>
+            <li><a class="navbar-item" routerLink="/admin-dashboard/osoblje-forma" routerLinkActive="is-active">Dodaj osoblje</a></li>
         </ul>
         </li>
-        <li><a class="navbar-item" routerLink="/admin-dashboard/studijski-program">Studijski programi</a></li>
-        <li><a>Organizacija</a></li>
+        <ul>
+            <li><a class="navbar-item" routerLink="/admin-dashboard/univerzitet" routerLinkActive="is-active">Univerzitet</a></li>
+            <li><a class="navbar-item" routerLink="/admin-dashboard/fakultet-stranica" routerLinkActive="is-active">Fakulteti</a></li>
+            <li><a class="navbar-item" routerLink="/admin-dashboard/studijski-program-stranica" routerLinkActive="is-active">Studijski programi</a></li>
+        </ul>
     </ul>
   </aside>
 </div>

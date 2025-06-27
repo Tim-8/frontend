@@ -12,7 +12,6 @@ import { AuthService } from '../services/auth.service';
 })
 export class PrijavaComponent {
   prijavaForma: FormGroup;
-  loginError: string | null = null;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -26,8 +25,7 @@ export class PrijavaComponent {
   }
 
   prijaviSe() {
-    this.loginError = null;
-    
+
     if (this.prijavaForma.invalid) {
       return;
     }
@@ -43,15 +41,17 @@ export class PrijavaComponent {
        
         if (this.authService.hasRole(['ROLE_ADMIN'])) { 
           this.router.navigate(['/admin-dashboard']);
+        } else if (this.authService.hasRole(['ROLE_OSOBLJE'])) {
+          this.router.navigate(['/osoblje-dashboard']);
         } else {
-            this.router.navigate(['/homepage']);
+          this.router.navigate(['/homepage']);
         } 
       },
       error: (err) => {
         if (err.status === 401) {
-          this.loginError = 'Neispravno korisnicko ime ili lozinka';
+          alert('Neispravno korisnicko ime ili lozinka.');
         } else {
-          this.loginError = 'Doslo je do greske prilikom prijave. Pokusajte ponovo.';
+          alert('Doslo je do greske prilikom prijave. Pokusajte ponovo.');
         }
       }
     })

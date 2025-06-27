@@ -1,0 +1,77 @@
+ <div class="univerzitet-forma-container">
+  <p class="subtitle">Podaci o univerzitetu</p>
+  <form [formGroup]="univerzitetForm" (ngSubmit)="sacuvaj()">
+
+    <div class="form-group">
+      <label for="Naziv">Naziv</label>
+      <input
+        type="text"  
+        id="naziv"
+        formControlName="naziv"
+        class="form-control"
+        [ngClass]="{'is-invalid': univerzitetForm.get('naziv')?.invalid && (univerzitetForm.get('naziv')?.dirty || univerzitetForm.get('naziv')?.touched)}" >
+        <div *ngIf="univerzitetForm.get('naziv')?.invalid && (univerzitetForm.get('naziv')?.dirty && univerzitetForm.get('naziv')?.touched)">
+          <div *ngIf="univerzitetForm.get('naziv')?.errors?.['required']">
+            Naziv je obavezna
+          </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+      <label for="DatumOsnivanja">Datum osnivanja</label>
+      <input
+        type="date"
+        id="datumOsnivanja"
+        formControlName="datumOsnivanja"
+        class="form-control"
+        [ngClass]="{'is-invalid': univerzitetForm.get('datumOsnivanja')?.invalid && (univerzitetForm.get('datumOsnivanja')?.dirty || univerzitetForm.get('datumOsnivanja')?.touched)}" >
+        <div *ngIf="univerzitetForm.get('datumOsnivanja')?.invalid && (univerzitetForm.get('datumOsnivanja')?.dirty && univerzitetForm.get('datumOsnivanja')?.touched)">
+          <div *ngIf="univerzitetForm.get('datumOsnivanja')?.errors?.['required']">
+            Datum osnivanja je obavezna
+          </div>
+        </div>
+    </div>
+    
+    <app-adresa-forma [adresaForm]="adresaFormGroup"></app-adresa-forma>
+
+    <div class="form-group">
+      <label>Fakulteti</label>
+      <div formArrayName="fakulteti">
+        <div *ngFor="let fakultet of fakulteti.controls; let i = index" [formGroupName]="i" class="d-flex align-items-center mb-2">
+          <input
+            type="text"
+            formControlName="naziv"
+            class="form-control"
+            placeholder="Naziv fakulteta"
+            [ngClass]="{'is-invalid': fakultet.get('naziv')?.invalid && (fakultet.get('naziv')?.dirty || fakultet.get('naziv')?.touched)}">
+
+          <button type="button" class="btn btn-danger btn-sm ml-2" (click)="ukloniFakultet(i)">−</button>
+        </div>
+      </div>
+      <button type="button" class="btn btn-secondary mt-2" (click)="dodajFakultet()">+ Dodaj fakultet</button>
+    </div>
+
+    <div class="form-group">
+      <label for="Rektor">Rektor</label>
+      <select id="rektor" formControlName="rektor" class="form-control">
+        <option value="">Izaberite rektora univerziteta</option>
+        <option *ngFor="let nastavnik of nastavnici" [ngValue]="nastavnik">{{ nastavnik.ime }}</option>    
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="Opis">Opis</label>
+      <textarea
+        id="opis"
+        formControlName="opis"
+        class="form-control"
+        rows="3"></textarea>
+    </div>
+
+    <div class="form-group"> 
+      <button type="submit" class="btn" [disabled]="univerzitetForm.invalid">
+        Sacuvaj
+      </button>
+    </div>
+  </form>
+</div>

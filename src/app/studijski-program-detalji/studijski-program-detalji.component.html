@@ -1,0 +1,25 @@
+<app-homepage 
+  [title]="title"
+  [subtitle]="'Detaljne informacije o studijskom programu'"
+  [color]="'white'"
+  [backgroundUrl]="backgroundUrl">
+</app-homepage>
+
+<section class="Podaci">
+  <div *ngIf="sp" class="container">
+    <h2 class="title is-3">{{ sp.naziv }}</h2>
+
+    <h3 class="title is-4 mt-6">Osnovne informacije</h3>
+    <div class="content">
+      <p class="formatirani-tekst"> {{ sp.opis }}</p>
+      <p>
+        <strong>Rukovodilac: </strong> 
+        <span *ngIf="sp.rukovodilac">{{ sp.rukovodilac.ime }}</span>
+      </p>
+    </div>
+
+    <div class="buttons mt-5">
+      <button class="button is-link" (click)="goBack()">Nazad na početnu</button>
+    </div>
+  </div>
+</section>

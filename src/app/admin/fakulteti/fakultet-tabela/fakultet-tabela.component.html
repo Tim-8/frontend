@@ -1,0 +1,30 @@
+<p class="subtitle">Fakulteti</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Naziv</th>
+            <th>Adresa</th>
+            <th>Univerzitet</th>
+            <th>Studijski programi</th>
+            <th>Dekan</th>
+            <th>Opis</th>
+            <th>Akcije</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let fakultet of fakulteti">
+            <td>{{ fakultet.naziv }}</td>
+            <td>{{ fakultet.adresa.ulica }} {{ fakultet.adresa.broj }}, {{ fakultet.adresa.mesto }}, {{ fakultet.adresa.drzava }}</td>
+            <td>{{ fakultet.univerzitet.naziv}}</td>
+             <ul>
+                <li *ngFor="let program of fakultet.studijskiProgrami">{{ program.naziv }}</li>
+            </ul>
+            <td>{{ fakultet.dekan.ime }}</td>
+            <td>{{ fakultet.opis }}</td>
+            <td>
+                <button (click)="izmeni(fakultet)">Izmeni</button>
+                <button (click)="izbrisi(fakultet.id)">Izbrisi</button>
+            </td>
+        </tr>
+    </tbody>
+</table>

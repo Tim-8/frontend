@@ -26,11 +26,14 @@ export class NastavnikService {
     });
   }
 
+  getAll(): Observable<Nastavnik[]> {
+    return this.http.get<Nastavnik[]>(this.apiUrl, {
+      headers: this.getHeaders()
+    });
+  }
+
   createNastavnik(nastavnik: Nastavnik): Observable<any> {
     const endpoint = `${this.apiUrl}/kreiraj`;
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json'
-    });
-    return this.http.post(endpoint, nastavnik, { headers: headers });
+    return this.http.post(endpoint, nastavnik, { headers: this.getHeaders() });
   }
 }

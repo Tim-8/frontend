@@ -1,57 +1,43 @@
 <app-homepage 
   [title]="'O Univerzitetu'"
   [subtitle]="'Savremeno obrazovanje za buduće lidere'"
-  [backgroundUrl]="'/assets/images/image4.jpg'"></app-homepage>
+  [backgroundUrl]="'/assets/images/image10.jpg'"></app-homepage>
 
-<section class="Podaci">
+<section class="Podaci" *ngIf="univerzitet">
   <div class="container">
     <h2 class="title is-3">Dobrodošli na Univerzitet</h2>
-    <p>
-      Univerzitet u <strong>Novom Sadu</strong> je moderna obrazovna institucija posvećena pružanju
-      kvalitetnog i dostupnog obrazovanja na svim nivoima studija. Naš cilj je da studentima omogućimo
-      sticanje znanja i veština koje će ih pripremiti za uspešnu karijeru i život u savremenom društvu.
-    </p>
+    <div class="content">
+      <p class="formatirani-tekst"> {{ univerzitet.opis }} </p>  
+    </div>
 
     <h3 class="title is-4 mt-5">Fakulteti i studijski programi</h3>
-    <ul>
-      <li>Fakultet tehničkih nauka – Softversko inženjerstvo, Mehatronika, Elektrotehnika</li>
-      <li>Ekonomski fakultet – Ekonomija, Menadžment, Računovodstvo</li>
-      <li>Pravni fakultet – Pravo, Međunarodno pravo, Bezbednost</li>
-    </ul>
-
-    <h3 class="title is-4 mt-5">Nastavno osoblje</h3>
-    <p>
-      Univerzitet okuplja više od <strong>300 profesora i asistenata</strong> sa bogatim akademskim i stručnim
-      iskustvom. Naši nastavnici posvećeni su kvalitetnoj nastavi, mentorskom radu i istraživanjima.
-    </p>
-
-    <h3 class="title is-4 mt-5">Kampus i infrastruktura</h3>
-    <p>
-      Studenti imaju pristup savremenim učionicama, laboratorijama, IT salama, biblioteci, kao i
-      sportskim terenima i studentskim menzama. Kampus se nalazi u mirnom delu grada i dobro je povezan javnim prevozom.
-    </p>
-
-    <h3 class="title is-4 mt-5">Međunarodna saradnja</h3>
-    <p>
-      Kroz <strong>Erasmus+</strong> i druge međunarodne programe, studenti imaju mogućnost razmene i usavršavanja
-      na univerzitetima širom Evrope i sveta.
-    </p>
-
-    <h3 class="title is-4 mt-5">Statistika</h3>
-    <ul>
-      <li>8.000+ aktivnih studenata</li>
-      <li>50+ akreditovanih programa</li>
-      <li>95% diplomiranih nalazi posao u roku od 12 meseci</li>
-      <li>20% studenata učestvuje u razmeni</li>
-    </ul>
+    <div *ngIf="univerzitet.fakulteti && univerzitet.fakulteti.length > 0"> 
+      <ul>
+        <li *ngFor="let fakultet of univerzitet.fakulteti">
+          <strong>{{ fakultet.naziv }} :</strong> 
+          <div *ngIf="fakultet.studijskiProgrami && fakultet.studijskiProgrami.length > 0">
+            <ul>
+                <li *ngFor="let sp of fakultet.studijskiProgrami">
+                  {{sp.naziv}}
+                </li>
+            </ul>
+        </div>
+        </li>
+      </ul>
+    </div>
 
     <h3 class="title is-4 mt-5">Kontakt informacije</h3>
     <p>
-      📍 Adresa: Bulevar Univerziteta 10, Novi Sad <br />
-      📞 Telefon: +381 23 123 456 <br />
-      ✉️ Email: kontakt&#64;univerzitet.rs <br />
-      🕗 Radno vreme: pon–pet, 08:00–16:00
+      <strong>Lokacija: </strong>
+      <span *ngIf="univerzitet.adresa">
+        {{ univerzitet.adresa.ulica }} {{ univerzitet.adresa.broj }},
+        {{ univerzitet.adresa.mesto }}, {{ univerzitet.adresa.drzava }}
+      </span> <br />
     </p>
+
+    <div class="buttons mt-5">
+      <button class="button is-link" (click)="goBack()">Nazad na početnu</button>
+    </div>
   </div>
 </section>
 

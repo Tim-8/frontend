@@ -1,0 +1,10 @@
+.form-layout {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+mat-form-field {
+  width: 500px;
+}

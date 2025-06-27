@@ -1,3 +1,4 @@
+
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, map, tap } from 'rxjs';
@@ -53,11 +54,6 @@ export class AuthService {
     return this.getToken() !== null;
   }
 
-  deleteToken(): void {
-    localStorage.removeItem('jwtToken');
-    localStorage.removeItem('roles');
-  }
-
   hasRole(uloge: string[]): boolean {
     const rolesString = localStorage.getItem('roles');
     if (!rolesString) {
@@ -65,5 +61,20 @@ export class AuthService {
     }
     const rolesArray = rolesString.split(',');
     return uloge.some(role => rolesArray.includes(role));
+  }
+
+  logout() {
+    localStorage.removeItem('jwtToken');
+    localStorage.removeItem('roles');
+  }
+
+  getLoggedUserId() {
+    const token = this.getToken();
+    if (!token) {
+      return null;
+    }
+
+    const decodedToken = this.jwtHelper.decodeToken(token);
+    return decodedToken?.id || null;
   }
 }

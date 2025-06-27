@@ -1,0 +1,47 @@
+.layout-container {
+  display: flex;
+  min-height: 100vh;
+  position: relative;
+  width: 100%;
+}
+
+.menu-toggle-btn {
+  position: absolute;
+  background: none;
+  top: 12px;
+  left: 260px;
+  z-index: 1001;
+  transition: left 0.3s ease-in-out; 
+}
+
+.menu-toggle-btn.menu-collapsed {
+  left: 20px;
+}
+
+app-osoblje-menu {
+  width: 250px; 
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  flex-shrink: 0; 
+  transform: translateX(0); 
+  transition: transform 0.3s ease-in-out, width 0.3s ease-in-out, padding 0.3s ease-in-out;
+  overflow: hidden; 
+}
+
+app-osoblje-menu.collapsed {
+  transform: translateX(-100%); 
+  width: 0; 
+  padding: 0; 
+}
+
+.main-content {
+  flex-grow: 1;
+  padding: 20px;
+  overflow-y: auto;
+  margin-left: 50px;
+  transition: margin-left 0.3s ease-in-out;
+}
+
+.main-content.menu-collapsed {
+  margin-left: 80px;
+}

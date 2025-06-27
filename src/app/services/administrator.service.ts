@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { RegistrovaniKorisnik } from '../model/registrovaniKorisnik';
-import { Observable } from 'rxjs';
+import { map, Observable, tap } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from './auth.service';
 
@@ -49,7 +49,21 @@ export class AdministratorService {
     return this.http.post<RegistrovaniKorisnik>(endpoint, {}, { headers: this.getHeaders() }); 
   }
 
+  updateUser(id: number, user: RegistrovaniKorisnik): Observable<string> {
+    return this.http.put<any>(`${this.apiUrl}${id}`, user, {
+      headers: this.getHeaders()
+    }).pipe(
+          map(response => response.token),
+          tap(token => this.authService.saveToken(token)) 
+      );
+  }
+
   deleteUser(id: number): Observable<void> { 
     return this.http.delete<void>(`${this.apiUrl}/${id}`, { headers: this.getHeaders() });
+  }
+
+  getLoggedUser(): Observable<RegistrovaniKorisnik> {
+    const userId = this.authService.getLoggedUserId();
+    return this.getUserById(userId);
   }
 }

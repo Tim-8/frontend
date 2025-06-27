@@ -1,0 +1,83 @@
+<div class="osoblje-forma-container">
+    <p class="subtitle">Dodajte osoblje</p>
+    <form [formGroup]="osobljeForm" (ngSubmit)="sacuvaj()">
+
+      <div class="form-group">
+        <label for="korisnickoIme">Korisničko ime</label>
+        <input 
+          type="text"
+          id="korisnickoIme"
+          formControlName="korisnickoIme"
+          class="form-control"
+          [ngClass]="{'is-invalid': osobljeForm.get('korisnickoIme')?.invalid && (osobljeForm.get('korisnickoIme')?.dirty || osobljeForm.get('korisnickoIme')?.touched)}">
+        <div *ngIf="osobljeForm.get('korisnickoIme')?.invalid && (osobljeForm.get('korisnickoIme')?.dirty || osobljeForm.get('korisnickoIme')?.touched)" class="invalid-feedback">
+          <div *ngIf="osobljeForm.get('korisnickoIme')?.errors?.['required']">
+            Korisničko ime je obavezno
+          </div>
+          <div *ngIf="osobljeForm.get('korisnickoIme')?.errors?.['minlength']">
+            Korisničko ime mora imati najmanje 3 karaktera
+          </div>
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="email">Email adresa</label>
+        <input 
+          type="email"
+          id="email"
+          formControlName="email"
+          class="form-control"
+          [ngClass]="{'is-invalid': osobljeForm.get('email')?.invalid && (osobljeForm.get('email')?.dirty || osobljeForm.get('email')?.touched)}">
+        <div *ngIf="osobljeForm.get('email')?.invalid && (osobljeForm.get('email')?.dirty || osobljeForm.get('email')?.touched)" class="invalid-feedback">
+          <div *ngIf="osobljeForm.get('email')?.errors?.['required']">
+            Email adresa je obavezna
+          </div>
+          <div *ngIf="osobljeForm.get('email')?.errors?.['email']">
+            Unesite validnu email adresu
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="lozinka">Lozinka</label>
+        <input 
+          type="password"
+          id="lozinka"
+          formControlName="lozinka"
+          class="form-control"
+          [ngClass]="{'is-invalid': osobljeForm.get('lozinka')?.invalid && (osobljeForm.get('lozinka')?.dirty || osobljeForm.get('lozinka')?.touched)}">
+        <div *ngIf="osobljeForm.get('lozinka')?.invalid && (osobljeForm.get('lozinka')?.dirty || osobljeForm.get('lozinka')?.touched)" class="invalid-feedback">
+          <div *ngIf="osobljeForm.get('lozinka')?.errors?.['required']">
+            Lozinka je obavezna
+          </div>
+          <div *ngIf="osobljeForm.get('lozinka')?.errors?.['minlength']">
+            Lozinka mora imati najmanje 6 karaktera
+          </div>
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="potvrdaLozinke">Potvrda lozinke</label>
+        <input 
+          type="password"
+          id="potvrdaLozinke"
+          formControlName="potvrdaLozinke"
+          class="form-control"
+          [ngClass]="{'is-invalid': osobljeForm.get('potvrdaLozinke')?.invalid && (osobljeForm.get('potvrdaLozinke')?.dirty || osobljeForm.get('potvrdaLozinke')?.touched)}">
+        <div *ngIf="osobljeForm.get('potvrdaLozinke')?.invalid && (osobljeForm.get('potvrdaLozinke')?.dirty || osobljeForm.get('potvrdaLozinke')?.touched)" class="invalid-feedback">
+          <div *ngIf="osobljeForm.get('potvrdaLozinke')?.errors?.['required']">
+            Potvrda lozinke je obavezna
+          </div>
+          <div *ngIf="osobljeForm.hasError('lozinkeSeNePodudaraju', ['potvrdaLozinke'])">
+            Lozinke se ne podudaraju
+          </div>
+        </div>
+      </div>
+  
+      <div class="form-group"> 
+        <button type="submit" class="btn" [disabled]="osobljeForm.invalid">
+          Sacuvaj
+        </button>
+      </div>
+    </form>
+  </div>

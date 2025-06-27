@@ -1,0 +1,20 @@
+<p class="subtitle">Studenti</p>
+<table class="table">
+  <thead>
+      <tr>
+        <th>Broj indeksa</th>
+        <th>Ime i prezime</th>
+        <th>Studijski program</th>
+      </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let student of studenti">
+        <ul>
+          <li *ngFor="let studentNaGodini of student.studentiNaGodini">
+            {{ studentNaGodini.brojIndeksa }}
+          </li>
+        </ul>
+        <td>{{ student.ime }}</td> 
+    </tr>
+  </tbody>
+</table>

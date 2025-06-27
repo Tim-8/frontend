@@ -5,10 +5,10 @@ import { Univerzitet } from "./univerzitet";
 
 export interface Fakultet {
     id: number,
-    naziv: String,
+    naziv: string,
     adresa: Adresa, 
     univerzitet: Univerzitet,
     studijskiProgrami?: StudijskiProgram[]
     dekan: Nastavnik,
-    opis: String
+    opis: string
 }

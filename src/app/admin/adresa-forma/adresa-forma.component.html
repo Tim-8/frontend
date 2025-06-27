@@ -1,0 +1,64 @@
+<div class="adresa-forma-container">
+  <form [formGroup]="adresaForm">
+
+    <div class="form-group">
+      <label for="Ulica">Ulica</label>
+      <input
+        type="text"
+        id="ulica"
+        formControlName="ulica"
+        class="form-control"
+        [ngClass]="{'is-invalid': adresaForm.get('ulica')?.invalid && (adresaForm.get('ulica')?.dirty || adresaForm.get('ulica')?.touched)}" >
+        <div *ngIf="adresaForm.get('ulica')?.invalid && (adresaForm.get('ulica')?.dirty && adresaForm.get('ulica')?.touched)">
+          <div *ngIf="adresaForm.get('ulica')?.errors?.['required']">
+            Ulica je obavezna
+          </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+      <label for="Broj">Broj</label>
+      <input
+        type="text"
+        id="broj"
+        formControlName="broj"
+        class="form-control"
+        [ngClass]="{'is-invalid': adresaForm.get('broj')?.invalid && (adresaForm.get('broj')?.dirty || adresaForm.get('broj')?.touched)}" >
+        <div *ngIf="adresaForm.get('broj')?.invalid && (adresaForm.get('broj')?.dirty && adresaForm.get('broj')?.touched)">
+          <div *ngIf="adresaForm.get('broj')?.errors?.['required']">
+            Broj je obavezan
+          </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+      <label for="Mesto">Grad</label>
+      <input
+        type="text"
+        id="mesto"
+        formControlName="mesto"
+        class="form-control"
+        [ngClass]="{'is-invalid': adresaForm.get('mesto')?.invalid && (adresaForm.get('mesto')?.dirty || adresaForm.get('mesto')?.touched)}" >
+        <div *ngIf="adresaForm.get('mesto')?.invalid && (adresaForm.get('mesto')?.dirty && adresaForm.get('mesto')?.touched)">
+          <div *ngIf="adresaForm.get('mesto')?.errors?.['required']">
+            Grad je obavezan
+          </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+      <label for="Drzava">Drzava</label>
+      <input
+        type="text"
+        id="drzava"
+        formControlName="drzava"
+        class="form-control"
+        [ngClass]="{'is-invalid': adresaForm.get('drzava')?.invalid && (adresaForm.get('drzava')?.dirty || adresaForm.get('drzava')?.touched)}" >
+        <div *ngIf="adresaForm.get('drzava')?.invalid && (adresaForm.get('drzava')?.dirty && adresaForm.get('drzava')?.touched)">
+          <div *ngIf="adresaForm.get('drzava')?.errors?.['required']">
+            Drzava je obavezna
+          </div>
+        </div>
+    </div>
+  </form>
+</div>

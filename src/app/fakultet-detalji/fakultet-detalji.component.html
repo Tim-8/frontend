@@ -1,0 +1,46 @@
+<app-homepage 
+  [title]="title"
+  [subtitle]="subtitle"
+  [color]="''"
+  [backgroundUrl]="backgroundUrl">
+</app-homepage>
+
+<section class="Podaci">
+  <div *ngIf="fakultet" class="container">
+    <h2 class="title is-3">{{ fakultet.naziv }}</h2>
+
+    <h3 class="title is-4 mt-6">Osnovne informacije</h3>
+    <div class="content">
+      <p><strong>Opis:</strong> {{ fakultet.opis }}</p>
+      <p>
+        <strong>Lokacija:</strong> 
+        <span *ngIf="fakultet.adresa">
+          {{ fakultet.adresa.ulica }} {{ fakultet.adresa.broj }},
+          {{ fakultet.adresa.mesto }}, {{ fakultet.adresa.drzava }}
+        </span>
+      </p>  
+      <p>
+        <strong>Dekan: </strong> 
+        <span *ngIf="fakultet.dekan">{{ fakultet.dekan.ime }}</span>
+      </p>
+    </div>
+
+    <h3 class="title is-4 mt-6">Studijski programi</h3>
+    <div *ngIf="fakultet.studijskiProgrami && fakultet.studijskiProgrami.length > 0; else noPrograms" class="columns is-multiline">
+      <div class="column is-one-third" *ngFor="let sp of fakultet.studijskiProgrami">
+        <div class="box">
+          <a [routerLink]="['/studijskiProgrami', sp.id]" class="navbar-item">
+            <p class="title is-5">{{ sp.naziv }}</p>
+          </a>
+        </div>
+      </div>
+    </div>
+    <ng-template #noPrograms>
+      <p>Trenutno nema dostupnih studijskih programa za ovaj fakultet.</p>
+    </ng-template>
+
+    <div class="buttons mt-5">
+      <button class="button is-link" (click)="goBack()">Nazad na početnu</button>
+    </div>
+  </div>
+</section>

@@ -9,9 +9,6 @@
     <nav class="navbar">
       <div class="container">
         <div class="navbar-brand">
-          <a class="navbar-item">
-            <img src="https://bulma.io/assets/images/bulma-type-white.png" alt="Logo" />
-          </a>
           <span class="navbar-burger" data-target="navbarMenuHeroA">
             <span></span>
             <span></span>
@@ -21,16 +18,31 @@
         </div>
         <div id="navbarMenuHeroA" class="navbar-menu">
           <div class="navbar-end">
-            <a class="navbar-item is-active" routerLink="/homepage"> Home </a>
-            <a class="navbar-item"> Examples </a>
-            <span class="navbar-item">
+            <a class="navbar-item" routerLink="/homepage" routerLinkActive="is-active">
+              <span class="icon">
+                <i class="fa-solid fa-house"></i>
+              </span>
+              Home
+            </a>
+            <a class="navbar-item" routerLink="/izmeni" *ngIf="jePrijavljen" routerLinkActive="is-active">
+              <span class="icon" id="userIcon">
+                <i class="fa-solid fa-user"></i>
+              </span>
+              Nalog
+            </a>
+            <span class="navbar-item" *ngIf="!jePrijavljen">
               <a class="button is-primary is-inverted" routerLink="/prijava">
                 <span>Prijavi se</span>
               </a>
             </span>
-            <span class="navbar-item">
+            <span class="navbar-item" *ngIf="!jePrijavljen">
               <a class="button is-primary is-inverted" routerLink="/registracija">
                 <span>Registruj se</span>
+              </a>
+            </span>
+            <span class="navbar-item" *ngIf="jePrijavljen">
+              <a class="button is-primary is-inverted" (click)="odjaviSe()">
+                <span>Odjavi se</span>
               </a>
             </span>
           </div>
@@ -42,8 +54,8 @@
   <!-- Hero content: will be in the middle -->
   <div class="hero-body">
     <div class="container has-text-centered">
-      <p class="title">{{ title }}</p>
-      <p class="subtitle">{{ subtitle }}</p>
+      <p [style.color]="color" class="title">{{ title }}</p>
+      <p [style.color]="color" class="subtitle">{{ subtitle }}</p>
     </div>
   </div>
 
@@ -53,6 +65,7 @@
       <div class="container">
         <div class="navbar-menu">
           <div class="navbar-start">
+            <div class="navbar is-hoverable"></div>
             <a class="navbar-item" routerLink="/detalji" routerLinkActive="is-active">O univerzitetu</a>
             <a class="navbar-item" routerLink="/upis" routerLinkActive="is-active">Upis</a>
 
@@ -60,6 +73,13 @@
               <a class="navbar-link">Fakultet</a>
               <div class="navbar-dropdown">
                   <a *ngFor="let fakultet of fakulteti" [routerLink]="['/fakulteti', fakultet.id]" class="navbar-item">{{ fakultet.naziv }}</a>
+              </div>
+            </div>
+
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link">Studijski program</a>
+              <div class="navbar-dropdown">
+                  <a *ngFor="let sp of studijskiProgrami" [routerLink]="['/studijskiProgrami', sp.id]" class="navbar-item">{{ sp.naziv }}</a>
               </div>
             </div>
           </div>

@@ -31,5 +31,4 @@ export class NaucnaOblastService {
       headers: this.getHeaders()
     })
   }
-
 }
