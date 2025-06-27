@@ -1,0 +1,29 @@
+<h2>Istorija studiranja</h2>
+
+<table *ngIf="istorija.length > 0; else nemaIstorije">
+  <thead>
+    <tr>
+      <th>Predmet</th>
+      <th>Ocena</th>
+      <th>Broj polaganja</th>
+      <th>Zadnji broj bodova</th>
+      <th>ESPB</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let p of istorija">
+      <td>{{ p.predmet.naziv }}</td>
+      <td>{{ p.konacnaOcena }}</td>
+      <td>{{ p.polaganja.length }}</td>
+      <td>{{ p.polaganja[p.polaganja.length - 1]?.bodovi || 'N/A' }}</td>
+      <td>{{ p.predmet.espb }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Prosečna ocena:</strong> {{ prosecnaOcena.toFixed(2) }}</p>
+<p><strong>Ukupno ECTS:</strong> {{ ukupnoEcts }}</p>
+
+<ng-template #nemaIstorije>
+  <p>Još uvek nema položenih predmeta.</p>
+</ng-template>

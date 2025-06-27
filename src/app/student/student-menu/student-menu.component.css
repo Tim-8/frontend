@@ -1,0 +1,19 @@
+.sidebar-wrapper {
+  display: flex;
+}
+
+.menu {
+  width: 250px;
+  min-width: 250px;
+  max-width: 250px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  overflow-y: auto;
+  padding: 20px;
+}
+
+.is-active{
+  color: rgb(134, 134, 215);
+}

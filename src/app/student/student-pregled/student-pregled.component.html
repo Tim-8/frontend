@@ -1,0 +1,18 @@
+<h2>Predmeti koje trenutno slušaš</h2>
+<ul *ngIf="pohadjanja.length > 0; else nemaPredmeta">
+  <li *ngFor="let p of pohadjanja">
+    {{ p.predmet.naziv }} – ESPB: {{ p.predmet.espb }}, Obavezan: {{ p.predmet.obavezan ? 'Da' : 'Ne' }}
+  </li>
+</ul>
+<ng-template #nemaPredmeta><p>Nema aktivnih predmeta.</p></ng-template>
+
+<hr>
+
+<h2>Obaveštenja</h2>
+<ul *ngIf="obavestenja.length > 0; else nemaObavestenja">
+  <li *ngFor="let o of obavestenja">
+    <strong>{{ o.predmet }}</strong>: {{ o.naslov }}<br>
+    {{ o.sadrzaj }} – {{ o.vremePostavljanja | date:'dd.MM.yyyy' }}
+  </li>
+</ul>
+<ng-template #nemaObavestenja><p>Trenutno nema obaveštenja.</p></ng-template>

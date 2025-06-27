@@ -43,6 +43,8 @@ export class PrijavaComponent {
           this.router.navigate(['/admin-dashboard']);
         } else if (this.authService.hasRole(['ROLE_OSOBLJE'])) {
           this.router.navigate(['/osoblje-dashboard']);
+        } else if (this.authService.hasRole(['ROLE_STUDENT'])) {
+          this.router.navigate(['/student-dashboard']);
         } else {
           this.router.navigate(['/homepage']);
         } 

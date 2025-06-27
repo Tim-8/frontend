@@ -21,6 +21,10 @@ import { PregledStudenataComponent } from './osoblje/studenti/pregled-studenata/
 import { StudijskiProgramDetaljiComponent } from './studijski-program-detalji/studijski-program-detalji.component';
 import { StudentFormaComponent } from './osoblje/studenti/student-forma/student-forma.component';
 import { RasporedNastaveComponent } from './osoblje/raspored-nastave/raspored-nastave.component';
+import { StudentPregledComponent } from './student/student-pregled/student-pregled.component';
+import { StudentPrijavaComponent } from './student/student-prijava/student-prijava.component';
+import { StudentHistoryComponent } from './student/student-history/student-history.component';
+import { StudentDashboardComponent } from './student/student-dashboard/student-dashboard.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'homepage', pathMatch: 'full' },
@@ -55,5 +59,16 @@ export const routes: Routes = [
             { path: 'raspored-nastave', component: RasporedNastaveComponent }
         ],
         data: { requiredRoles: ["ROLE_OSOBLJE"] }, canActivate:[authGuard]
+    },
+    {
+        path: 'student-dashboard', component: StudentDashboardComponent,
+        children: [
+            { path: '', redirectTo: 'pregled', pathMatch: 'full' },
+            { path: 'pregled', component: StudentPregledComponent },
+            { path: 'prijava', component: StudentPrijavaComponent },
+            { path: 'istorija', component: StudentHistoryComponent }
+        ],
+        data: { requiredRoles: ["ROLE_STUDENT"] }, canActivate: [authGuard]
     }
+
 ];
