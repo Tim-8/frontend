@@ -1,7 +1,7 @@
 <h2>Prijava ispita</h2>
 
-<ul *ngIf="predmeti.length > 0; else nemaPredmeta">
-  <li *ngFor="let p of predmeti">
+<ul *ngIf="aktivniPredmeti.length > 0; else nemaPredmeta">
+  <li *ngFor="let p of aktivniPredmeti">
     {{ p.naziv }} – ESPB: {{ p.espb }}
     <button (click)="prijavi(p.id)">Prijavi ispit</button>
   </li>

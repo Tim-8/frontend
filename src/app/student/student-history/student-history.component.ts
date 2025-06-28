@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { StudentService } from '../../services/student.service';
 import { PohadjanjePredmeta } from '../../model/pohadjanjePredmeta';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-student-history',
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './student-history.component.html',
   styleUrls: ['./student-history.component.css']
 })

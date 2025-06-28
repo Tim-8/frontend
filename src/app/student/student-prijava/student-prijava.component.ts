@@ -2,11 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { StudentService } from '../../services/student.service';
 import { PohadjanjePredmeta } from '../../model/pohadjanjePredmeta';
 import { Predmet } from '../../model/predmet';
+import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-student-exam-registration',
-  templateUrl: './student-exam-registration.component.html',
-  styleUrls: ['./student-exam-registration.component.css']
+  selector: 'app-student-prijava',
+  standalone: true,
+  imports: [CommonModule],
+  templateUrl: './student-prijava.component.html',
+  styleUrls: ['./student-prijava.component.css']
 })
 export class StudentPrijavaComponent implements OnInit {
 

@@ -2,9 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { StudentService } from '../../services/student.service';
 import { PohadjanjePredmeta } from '../../model/pohadjanjePredmeta';
 import { Obavestenje } from '../../model/obavestenje';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-student-pregled',
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './student-pregled.component.html',
   styleUrls: ['./student-pregled.component.css']
 })
