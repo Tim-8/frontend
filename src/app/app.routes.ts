@@ -4,7 +4,6 @@ import { PrijavaComponent } from './prijava/prijava.component';
 import { RegistracijaComponent } from './registracija/registracija.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { DetaljiComponent } from './detalji/detalji.component';
-import { UpisComponent } from './upis/upis.component';
 import { AktivacijaComponent } from './admin/aktivacija/aktivacija.component';
 
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
@@ -27,13 +26,12 @@ import { StudentHistoryComponent } from './student/student-history/student-histo
 import { StudentDashboardComponent } from './student/student-dashboard/student-dashboard.component';
 
 export const routes: Routes = [
-    { path: '', redirectTo: 'homepage', pathMatch: 'full' },
+    { path: '', redirectTo: 'detalji', pathMatch: 'full' },
     { path: 'homepage', component: HomepageComponent },
     { path: 'prijava', component: PrijavaComponent },
     { path: 'registracija', component: RegistracijaComponent },
     { path: 'izmeni', component: IzmeniComponent },
     { path: 'detalji', component: DetaljiComponent },
-    { path: 'upis', component: UpisComponent },
     { path: 'fakulteti/:id', component: FakultetDetaljiComponent },
     { path: 'studijskiProgrami/:id', component: StudijskiProgramDetaljiComponent},
     { 
